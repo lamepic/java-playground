@@ -2,16 +2,10 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        String sentence = "lamepic nerd";
 
-        int numLines = scanner.nextInt();
-        scanner.nextLine();
+        System.out.println(sentence.substring(sentence.length() -1));
 
-        for(int i = 0; i < numLines; i++){
-            String line = scanner.nextLine();
-
-            System.out.println(Arrays.toString(line.split(">")));
-        }
     }
 
 }
