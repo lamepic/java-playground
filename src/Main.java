@@ -2,9 +2,10 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        String sentence = "lamepic nerd";
+        String sentence = "12345";
 
-        System.out.println(sentence.substring(sentence.length() -1));
+
+        System.out.println(FPP.allValuesTheSame(new int[]{0, 0, 0, 0, -1}));
 
     }
 

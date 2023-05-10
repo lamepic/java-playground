@@ -1,3 +1,4 @@
+import java.sql.Array;
 import java.util.*;
 
 // class containing methods of the FPP test
@@ -637,6 +638,269 @@ Examples
 //       }
 //    }
 
+
+    static int smallest(int n){
+        int number = 1;
+
+        while(true){
+            int count = 0;
+            for(int i = 1; i <= n; i++){
+                if(containsTwo(number * i)){
+                    count++;
+                }
+            }
+
+            if(count == n){
+                break;
+            }
+
+            number++;
+        }
+
+        return number;
+    }
+
+    static boolean containsTwo(int n){
+        while(n > 0){
+            if(n % 10 == 2){
+                return true;
+            }
+
+            n /= 10;
+        }
+
+        return false;
+    }
+
+//    cluster compression
+    static int[] clusterCompression(int[] a){
+        List<Integer> cluster = new ArrayList<>();
+
+        for(int i=0; i < a.length - 1; i++){
+            if(a[i] != a[i+1]){
+                cluster.add(a[i]);
+            }
+        }
+
+        int[] clusterArr = new int[cluster.size()];
+
+
+        for(int i=0; i<cluster.size(); i++){
+            clusterArr[i] = cluster.get(i);
+        }
+
+        return clusterArr;
+    }
+
+//    is railroad array
+
+    static int isRoadTie(int[] a){
+        boolean flag = false;
+
+        for(int x:a){
+            if(x > 0){
+                flag = true;
+                break;
+            }
+        }
+
+        for(int i=1; i<a.length-1; i++){
+            int prev = a[i-1];
+            int next = a[i+1];
+            int current = a[i];
+            if(current > 0){
+                if(prev > 0 && next > 0 || prev == 0 && next == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if(current == 0 && (prev <= 0 && next <= 0)){
+                flag = false;
+                break;
+            }
+        }
+
+        if(flag){
+            return 1;
+        }
+        return 0;
+    }
+
+//    is packed
+    static int isPacked(int[] a){
+       int i = 0;
+
+       while(i < a.length){
+           int value = a[i];
+           int count = 0;
+
+           if(value < 0){
+               return 0;
+           }
+
+           while(i < a.length && a[i] == value){
+               count++;
+               i++;
+           }
+
+           if(count != value){
+               return 0;
+           }
+       }
+
+       return 1;
+    }
+
+//    is odd-heavy
+    static int isOddHeavy(int[] a){
+        for(int i = 0; i<a.length; i++){
+            for(int j = 0; j < a.length; j++){
+                boolean isOdd = a[i] % 2 != 0;
+                boolean isEven = a[j] % 2 == 0;
+                if(isOdd && isEven && a[i] < a[j]){
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
+
+//    get exponent
+    static int getExponent(int n, int p){
+        if(p <= 1){
+            return -1;
+        }
+
+        int i = 0;
+        int ans = 0;
+
+        while(true){
+            int exponent = (int)Math.pow(p, i);
+
+            if(n % exponent == 0){
+                ans = exponent;
+                i++;
+            }else{
+                return i - 1;
+            }
+        }
+    }
+
+//    is hodder
+    static int isHodder(int n){
+        for(int i=2; i<n; i++){
+            if(n % 2 == 0){
+                return 0;
+            }
+        }
+
+        for(int i=0; i<n; i++){
+            if(n == Math.pow(2, i) - 1){
+                return 1;
+            }
+        }
+
+        return 0;
+
+    }
+
+//    pairwise sum
+
+    static int[] pairwiseSum(int[] a){
+        if(a.length == 0 || a.length % 2 != 0){
+            return null;
+        }
+
+        int[] arr = new int[a.length/2];
+        int index = 0;
+        int count = 0;
+
+        while(count < a.length){
+            int sum = a[count] + a[count + 1];
+            arr[index] = sum;
+            index++;
+            count += 2;
+        }
+
+        return arr;
+    }
+
+//    is square
+    static int isSquare(int n){
+        for(int i=0; i < n; i++){
+            if(i * i > n){
+                return 0;
+            }else if(i * i == n){
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+//    is complete
+    static int isComplete(int[] a){
+        boolean hasEven = false;
+        boolean hasPerfectSquare = false;
+        boolean hasSum = false;
+
+        for(int i=0; i < a.length; i++){
+            int element = a[i];
+
+            if(isSquare(a[i]) == 1){
+                hasPerfectSquare = true;
+            }else if(a[i] % 2 == 0){
+                hasEven = true;
+            }
+
+            for(int j=i+1; j < a.length; j++){
+                if(element + a[j] == 8){
+                    hasSum = true;
+                    break;
+                }
+            }
+
+            if(hasSum && hasEven && hasPerfectSquare){
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+//    loopSum
+    static int loopSum(int[] a, int n){
+        int count = 1;
+        int index = 0;
+        int sum = 0;
+
+        while(count <= n){
+            sum += a[index];
+
+            count++;
+            index++;
+
+            if(index > a.length - 1){
+                index = 0;
+            }
+        }
+
+        return sum;
+    }
+
+//    all values the same
+    static int allValuesTheSame(int[] a){
+        for(int i = 0; i <a.length - 1; i++){
+            int element = a[i];
+
+            if(element != a[i+1]){
+                return 0;
+            }
+        }
+
+        return 1;
+    }
 }
 
 
