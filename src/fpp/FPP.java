@@ -1,7 +1,9 @@
+package fpp;
+
 import java.sql.Array;
 import java.util.*;
 
-// class containing methods of the FPP test
+// class containing methods of the fpp.FPP test
 public class FPP {
 
 /*Question 1
